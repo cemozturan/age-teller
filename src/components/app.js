@@ -8,13 +8,16 @@ class App extends Component {
     super(); // Required before we can use the "this" keyword
     this.state = {
       newDate: '',
-      birthday: '1999-06-21'
+      birthday: '1999-06-21',
+      showStats: false
     };
   }
 
   changeBirthday() {
-    this.setState({ birthday: this.state.newDate });
-    console.log(this.state);
+    this.setState({
+      birthday: this.state.newDate,
+      showStats: true
+    });
   }
 
   render() {
@@ -28,7 +31,13 @@ class App extends Component {
           {' '}
           <Button onClick={() => this.changeBirthday()}>Submit</Button>
         </Form>
-        <AgeStats date={this.state.birthday}/>
+        {
+          this.state.showStats
+          ? <div className="fade age-stats">
+              <AgeStats date={this.state.birthday}/>
+            </div>
+          : <div />
+        }
       </div>
     );
   }
